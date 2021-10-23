@@ -1,0 +1,18 @@
+# Compiled class file
+*.class
+
+#log file
+*.log
+
+# Package files #
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+.gradle/
+.idea
+build
