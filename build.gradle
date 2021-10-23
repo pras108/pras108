@@ -1,3 +1,76 @@
-plugins{
+plugins {
 
+    id "net.linguica.maven-settings" version "0.5"
+    id 'org.springframework.boot' version '2.3.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'pl.allegro.tech.build.axion-release' version '1.11.0'
+    id 'org.jruyi.thrift' version '0.4.2'
+    id 'java'
+    id 'jacoco'
+}
+
+group = 'com.practice'
+version = scmVersion.version
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation "org.apache.thrift:libthrift:0.14.1"
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/com/practice/afrp/*',
+                              '**/com/practice/controller/*',
+                              '**/com/practice/config/*',
+                              '**/com/practice/domain/*',
+                              '**/com/practice/exception/*',
+                              '**/StartApplication**'
+                    ])
+        })
+    }
+}
+
+compileThrift {
+    generator 'java'
+    thriftExecutable 'C:\\Users\\shand\\Downloads\\thrift-0.14.1.exe'
+    sourceItems 'src/main/resources/thrift/dummy.thrift'
+            /*'src/main/resources/thrift/ref-table-service.thrift','src/main/resources/thrift/refernceTableCommon.thrift'*/
+
+    recurse false
+    debug false
+    createGenFolder false
+    strict true
+    verbose false
 }
