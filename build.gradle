@@ -22,9 +22,17 @@ configurations {
 repositories {
     mavenLocal()
     mavenCentral()
+   /* maven {
+        url 'url'
+        name 'Repository'
+        authentication {
+            basic(BasicAuthentication)
+        }
+    }*/
 }
 
 dependencies {
+    //implementation 'com.practice-model-thrift:1.1.0-SNAPSHOT' sample for including jar dependency
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     compileOnly 'org.projectlombok:lombok'
