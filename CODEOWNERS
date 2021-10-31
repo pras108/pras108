@@ -4,3 +4,4 @@
 /src @pras108
 *.gradle @pras108
 *.properties @pras108
+*.thift @pras108
