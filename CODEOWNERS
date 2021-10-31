@@ -1,5 +1,5 @@
-# In this example, any change inside the `/apps` directory
-# will require approval from @doctocat.
+# In this example, any change inside the below files or directory
+# will require approval from @pras108.
 *.java @pras108
 /src @pras108
 *.gradle @pras108
