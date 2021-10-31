@@ -1,0 +1,6 @@
+# In this example, any change inside the `/apps` directory
+# will require approval from @doctocat.
+*.java @pras108
+/src @pras108
+*.gradle @pras108
+*.properties @pras108
