@@ -67,7 +67,7 @@ compileThrift {
     generator 'java'
     thriftExecutable 'C:\\Users\\shand\\Downloads\\thrift-0.14.1.exe'
     sourceItems 'src/main/resources/thrift/dummy.thrift'
-            /*'src/main/resources/thrift/ref-table-service.thrift','src/main/resources/thrift/refernceTableCommon.thrift'*/
+            
 
     recurse false
     debug false
