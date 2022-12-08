@@ -1,7 +1,7 @@
 package com.practice.service;
 
 import com.practice.model.Movies;
-import com.practice.repository.MovieRespository;
+import com.practice.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ import java.util.List;
 public class MovieService {
 
     @Autowired
-    MovieRespository movieRespository;
+    MovieRepository movieRepository;
 
     public List<Movies> getAllMoviesFromDB() {
         List<Movies> movies = new ArrayList<>();
-        movies = movieRespository.findAll();
+        movies = movieRepository.findAll();
         return movies;
     }
 }
