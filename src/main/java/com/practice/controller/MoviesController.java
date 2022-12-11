@@ -1,5 +1,6 @@
 package com.practice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practice.model.Movies;
 import com.practice.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class MoviesController {
                                                  @RequestParam("size") int size) throws Exception{
         Page<Movies> pagedResultsForMovies = movieService.getPagedResultsForMovies(pageNo, size);
         log.info("size of paged movies : {}", pagedResultsForMovies.stream().count());
-        return new ResponseEntity<>(pagedResultsForMovies.getContent().toString(), HttpStatus.OK);
+        return new ResponseEntity<>(new ObjectMapper().writeValueAsString(pagedResultsForMovies.getContent()), HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

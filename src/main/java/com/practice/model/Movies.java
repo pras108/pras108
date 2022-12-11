@@ -1,5 +1,6 @@
 package com.practice.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "movies")
 @Data
+@Builder
 public class Movies {
 
     @Id

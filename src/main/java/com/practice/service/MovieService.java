@@ -20,6 +20,9 @@ public class MovieService {
     }
 
     public Page<Movies> getPagedResultsForMovies(int pageNo, int size) {
+        if (pageNo < 0) {
+            throw new RuntimeException("Invalid request Parameters!");
+        }
         PageRequest pageRequest = PageRequest.of(pageNo, size);
         return movieRepository.findAll(pageRequest);
     }
