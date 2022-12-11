@@ -1,9 +1,12 @@
 package com.practice.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "movies")
+@Data
 public class Movies {
 
     @Id
