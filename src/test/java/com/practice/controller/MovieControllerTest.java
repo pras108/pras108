@@ -1,30 +1,54 @@
-package com.practice.service;
+package com.practice.controller;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.practice.model.Movies;
-import com.practice.repository.MovieRepository;
+import com.practice.service.ActorService;
+import com.practice.service.MovieService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@ExtendWith(MockitoExtension.class)
-class MovieServiceTest {
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-    @Mock
-    MovieRepository movieRepository;
+//@SpringBootTest
+@WebMvcTest
+//@Disabled
+public class MovieControllerTest {
 
-    @InjectMocks
-    MovieService movieService;
+    @Autowired
+    protected MockMvc mvc;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private MovieService movieService;
+
+    //remove the below dependency to check for error
+    @MockBean
+    private ActorService actorService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private static List<Movies> moviesList = new ArrayList<>();
 
@@ -68,20 +92,15 @@ class MovieServiceTest {
     }
 
     @Test
-    public void testGetAllMovies() {
-        Mockito.when(movieRepository.findAll()).thenReturn(moviesList);
-        List<Movies> allMoviesFromDB = movieService.getAllMoviesFromDB();
-        Assertions.assertNotNull(allMoviesFromDB);
-        Assertions.assertEquals(3, allMoviesFromDB.size());
-        Assertions.assertEquals("Harry Potter and the Chamber of Secrets", allMoviesFromDB.get(1).getTitle());
-    }
+    public void getMovies() throws Exception {
 
-    @Test
-    public void testGetAllPagedMovies() {
-        Page<Movies> page = new PageImpl<>(moviesList);
-        Mockito.when(movieRepository.findAll(PageRequest.of(0, 3))).thenReturn(page);
-        Page<Movies> pagedResultsForMovies = movieService.getPagedResultsForMovies(0, 3);
-        Assertions.assertNotNull(pagedResultsForMovies);
-        Assertions.assertEquals(3, pagedResultsForMovies.getContent().size());
+        given(movieService.getAllMoviesFromDB()).willReturn(moviesList);
+
+        // when -  action or the behaviour that we are going test
+        ResultActions response = mockMvc.perform(get("/movies"));
+
+        // then - verify the output
+        response.andExpect(status().isOk())
+                .andDo(print());
     }
 }

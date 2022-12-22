@@ -1,7 +1,9 @@
 package com.practice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.practice.model.Actor;
 import com.practice.model.Movies;
+import com.practice.service.ActorService;
 import com.practice.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class MoviesController {
     @Autowired
     MovieService movieService;
 
+    @Autowired
+    ActorService actorService;
+
     @GetMapping("/movies")
     public ResponseEntity<String> getAllMovies() {
         String response = "Welcome to Movies Controller";
@@ -37,6 +42,13 @@ public class MoviesController {
         Page<Movies> pagedResultsForMovies = movieService.getPagedResultsForMovies(pageNo, size);
         log.info("size of paged movies : {}", pagedResultsForMovies.stream().count());
         return new ResponseEntity<>(new ObjectMapper().writeValueAsString(pagedResultsForMovies.getContent()), HttpStatus.OK);
+    }
+
+    @GetMapping("/actors")
+    public ResponseEntity<String> getAllActors() {
+        List<Actor> actors = actorService.getAllActors();
+        log.info("size of actors list: {}", actors.size());
+        return new ResponseEntity<>(actors.toString(), HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)
