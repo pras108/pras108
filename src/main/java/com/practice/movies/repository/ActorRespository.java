@@ -1,6 +1,7 @@
-package com.practice.repository;
+package com.practice.movies.repository;
 
-import com.practice.model.Actor;
+
+import com.practice.movies.model.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

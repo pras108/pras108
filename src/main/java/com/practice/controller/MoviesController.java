@@ -1,8 +1,9 @@
 package com.practice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.practice.model.Actor;
-import com.practice.model.Movies;
+
+import com.practice.movies.model.Actor;
+import com.practice.movies.model.Movies;
 import com.practice.service.ActorService;
 import com.practice.service.MovieService;
 import lombok.extern.slf4j.Slf4j;

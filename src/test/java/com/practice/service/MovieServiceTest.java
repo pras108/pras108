@@ -1,7 +1,7 @@
 package com.practice.service;
 
-import com.practice.model.Movies;
-import com.practice.repository.MovieRepository;
+import com.practice.movies.model.Movies;
+import com.practice.movies.repository.MovieRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

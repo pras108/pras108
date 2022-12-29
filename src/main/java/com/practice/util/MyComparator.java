@@ -1,6 +1,6 @@
 package com.practice.util;
 
-import com.practice.model.Movies;
+import com.practice.movies.model.Movies;
 
 import java.util.Comparator;
 

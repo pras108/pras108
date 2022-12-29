@@ -1,7 +1,7 @@
 package com.practice.service;
 
-import com.practice.model.Actor;
-import com.practice.repository.ActorRespository;
+import com.practice.movies.model.Actor;
+import com.practice.movies.repository.ActorRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,7 @@
 package com.practice.service;
 
-import com.practice.model.Actor;
-import com.practice.model.Movies;
-import com.practice.repository.ActorRespository;
-import com.practice.repository.MovieRepository;
+import com.practice.movies.model.Movies;
+import com.practice.movies.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
