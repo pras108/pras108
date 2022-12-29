@@ -53,6 +53,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.h2database/h2
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    // https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core
+    implementation group: 'org.springframework.batch', name: 'spring-batch-core', version: '4.3.3'
+
 
 
 
