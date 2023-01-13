@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.practice.movies.model.Movies;
 import com.practice.service.ActorService;
+import com.practice.service.AttachmentService;
+import com.practice.service.CouponService;
 import com.practice.service.MovieService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 //@SpringBootTest
 @WebMvcTest
 //@Disabled
-public class MovieControllerTest {
+public class ControllerTest {
 
     @Autowired
     protected MockMvc mvc;
@@ -37,9 +39,15 @@ public class MovieControllerTest {
     @MockBean
     private MovieService movieService;
 
+    @MockBean
+    private CouponService couponService;
+
     //remove the below dependency to check for error
     @MockBean
     private ActorService actorService;
+
+    @MockBean
+    private AttachmentService attachmentService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -97,4 +105,31 @@ public class MovieControllerTest {
         response.andExpect(status().isOk())
                 .andDo(print());
     }
+
+    @Test
+    public void getCoupons() throws Exception {
+
+        given(couponService.getAllCoupons()).willReturn(new ArrayList<>());
+
+        // when -  action or the behaviour that we are going test
+        ResultActions response = mockMvc.perform(get("/coupons"));
+
+        // then - verify the output
+        response.andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    public void getExceptionFetchingCoupons() throws Exception {
+
+        given(couponService.getAllCoupons()).willReturn(null);
+
+        // when -  action or the behaviour that we are going test
+        ResultActions response = mockMvc.perform(get("/coupons"));
+
+        // then - verify the output
+        response.andExpect(status().is4xxClientError())
+                .andDo(print());
+    }
+
 }
